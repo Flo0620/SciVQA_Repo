@@ -1,0 +1,51 @@
+[
+    {
+        "instance_id": "98ef007ffc856a0fa7f34d22e5b0eb14",
+        "image_file": "1210.5581v1-Figure3-1.png",
+        "figure_id": "1210.5581v1-Figure3-1",
+        "caption": "Figure 3. Annual frequency of USA being mentioned with Russia, Japan, and G20 countries",
+        "figure_type": "line chart",
+        "compound": false,
+        "figs_numb": "1",
+        "qa_pair_type": "closed-ended infinite answer set non-visual",
+        "question": "Which country, besides the USA, is mentioned the most frequently in the year 1990?",
+        "answer": "Japan",
+        "answer_options": [],
+        "venue": "arxiv",
+        "categories": "['cs.CL cs.DL cs.IR']",
+        "source_dataset": "scigraphqa",
+        "paper_id": "1210.5581",
+        "pdf_url": "https://arxiv.org/pdf/1210.5581v1"
+    },
+    {
+        "instance_id": "5598ade7b9792fdcc3d3e6a04f750a09",
+        "image_file": "1210.5581v1-Figure3-1.png",
+        "figure_id": "1210.5581v1-Figure3-1",
+        "caption": "Figure 3. Annual frequency of USA being mentioned with Russia, Japan, and G20 countries",
+        "figure_type": "line chart",
+        "compound": false,
+        "figs_numb": "1",
+        "qa_pair_type": "closed-ended finite answer set non-binary visual",
+        "question": "The line of which color had highest annual mention frequency before 1925?",
+        "answer": "C",
+        "answer_options": [
+            {
+                "A": "Red line"
+            },
+            {
+                "B": "Green line"
+            },
+            {
+                "C": "Blue line"
+            },
+            {
+                "D": "Yellow line"
+            }
+        ],
+        "venue": "arxiv",
+        "categories": "['cs.CL cs.DL cs.IR']",
+        "source_dataset": "scigraphqa",
+        "paper_id": "1210.5581",
+        "pdf_url": "https://arxiv.org/pdf/1210.5581v1"
+    }
+]

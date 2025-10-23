@@ -1,0 +1,9 @@
+Question: 
+{{ user_prompt[-1].text }}
+{% if qa_pair_type %}
+QA Pair Type: {{ qa_pair_type }}
+{% endif %}
+{% if answer_options %}
+Answer Options: {{answer_options}}
+{%endif%}
+Answer: 

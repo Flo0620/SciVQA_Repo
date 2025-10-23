@@ -1,0 +1,4 @@
+name: katebor/SciVQA
+split: test
+input_dir: /ltstorage/home/9schleid/scivqa/data
+sys_prompt_path: /ltstorage/home/9schleid/scivqa/src/scivqa/prompts/sys_prompts/sys_prompt_14.txt

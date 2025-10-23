@@ -1,0 +1,63 @@
+[project]
+name = "scivqa"
+version = "0.1.0"
+description = "Repository for Shared Task Sci VQA"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "encourage",
+    "hydra-core>=1.3.2",
+    #"vllm>=0.8.2",
+    "vllm>=0.7.3",
+    "datasets>=2.4.0",
+    "accelerate>=1.6.0",
+    "torch>=2.5.1",
+    "transformers==4.50.3",
+    "bitsandbytes>=0.45.3",
+    "outlines>=0.1.11",
+    "rouge-score>=0.1.2 ",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipywidgets>=8.1.5",
+    "jupyterlab>=4.0",
+    "jupytext>=1.16.3",
+    "notebook>=7.0",
+    "matplotlib>=3.9.1",
+    "tensorboard>=2.17.0",
+    "pip-licenses>=4.5.1",
+    "nbconvert[webpdf]>=7.16.4",
+]
+
+
+[tool.ruff]
+line-length = 100
+lint.select = ["E", "F", "W", "I", "D", "A", "N", "B", "SIM", "C4", "TID"]
+lint.ignore = [
+    "D100", # Missing docstring in public module
+    "E741", # Ambiguous variable name
+    "D213", # Multi-line docstring summary should start at the second line
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in __init__
+    "D203", # 1 blank line required before class docstring
+    "D401", # First line should be in imperative mood; try rephrasing
+    "D407", # Missing dashed underline after section
+    "D406", # Section name should end with a newline
+    "D106", # Missing docstring in public nested class
+    "B006", # Do not use mutable data structures for argument defaults
+    "B008", # Do not perform function calls in argument defaults
+    "B905", # `zip()` without an explicit `strict=` parameter
+]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm", "torch"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["scivqa*"]
+
+[tool.uv.sources]
+encourage = { git = "ssh://git@github.com/uhh-hcds/encourage.git", branch = "detailed_rouge_metric" }

@@ -1,0 +1,13 @@
+Here is an example:
+The caption of the image is:
+{{ caption }}
+This is the Question:
+{{ question }}
+{% if answer_options %}
+You have the following answer options to choose from. Multiple answers may be correct. List only the letter of the correct answers in the order they are given without spaces between them.
+Answer Options:
+{{answer_options}}
+{%endif%}
+Give a short and precise answer:
+<image>
+Answer: {{ answer }}

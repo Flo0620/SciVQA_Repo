@@ -1,0 +1,17 @@
+Here is the caption of the image:
+{{ caption }}
+This is the Question: 
+{{ user_prompt[-1].text }}
+{% if answer_options %}
+You have the following answer options to choose from. Multiple answers may be correct. List only the letter of the correct answers in the order they are given without spaces between them.
+Answer Options:
+{{answer_options}}
+{%endif%}
+Decompose the question into steps by following this checklist:
+1. What information is needed to answer the question?
+2. Which chart is of interest and contains this information?
+3. Which elements are of importance of the chart? e.g. which is the line of interest?
+4. What is the value of the element of interest?
+5. Answer the question based on the value of the element of interest. 
+
+Write your tought process in the thought_process value of the response json and the short and precise final answer in the answer value of the response json.

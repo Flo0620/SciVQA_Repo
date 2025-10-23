@@ -1,0 +1,10 @@
+Question: 
+{{ user_prompt[-1].text }}
+{% if answer_options %}
+You have the following answer options to choose from. Multiple answers may be correct. List the correct answers in the order they are given without spaces between them.
+Answer Options:
+{{answer_options}}
+{% else %}
+If you answer with Yes or No write it with a capital letter in the beginning.
+{%endif%}
+Give a short and precise answer: 

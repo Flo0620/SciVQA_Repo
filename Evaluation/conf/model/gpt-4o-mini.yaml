@@ -1,0 +1,10 @@
+model_name: "gpt-4o-mini"
+model_name_short: "gpt-4o-mini"
+gpu_memory_utilization: null
+temperature: null
+max_tokens: null
+top_p: null
+max_model_len: null
+tensor_parallel_size: null
+quantization: null
+tool_call_parser: null

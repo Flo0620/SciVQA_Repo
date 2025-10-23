@@ -1,0 +1,8 @@
+Fine-Tuning/.env
+Fine-Tuning/shared_task/**/*.png
+Evaluation/**/*.png
+Evaluation/**/*.jpg
+OpenAI_Inference/**/*.png
+OpenAI_Inference/**/*.jsonl
+**/.env
+OpenAI_Inference/.env

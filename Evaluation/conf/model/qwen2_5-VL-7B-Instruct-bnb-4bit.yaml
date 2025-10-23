@@ -1,0 +1,10 @@
+model_name: "unsloth/Qwen2.5-VL-7B-Instruct-bnb-4bit"
+model_name_short: "Qwen2.5-VL-7B-Instruct-bnb-4bit"
+gpu_memory_utilization: 0.9
+temperature: 0.01
+max_tokens: 1000
+top_p: 0.95
+max_model_len: 32768
+tensor_parallel_size: 1
+quantization: null
+tool_call_parser: llama3_json

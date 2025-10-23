@@ -1,0 +1,4 @@
+name: /ltstorage/home/9schleid/scivqa/data/spiqa/SPIQA_test_split.json
+split: test
+input_dir: /ltstorage/home/9schleid/scivqa/data/spiqa
+sys_prompt_path: /ltstorage/home/9schleid/scivqa/src/scivqa/prompts/sys_prompts/sys_prompt_11.txt

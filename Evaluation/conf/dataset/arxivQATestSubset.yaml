@@ -1,0 +1,5 @@
+#Der Split ist noch aus den alten Test Daten
+name: /ltstorage/home/9schleid/scivqa/data/arxiv_qa/filteredDatasetLCSS6ProcessedForHyperparametertuning_1680_subset_of_test_split.json
+split: validation
+input_dir: /ltstorage/home/9schleid/scivqa/data/arxiv_qa
+sys_prompt_path: /ltstorage/home/9schleid/scivqa/src/scivqa/prompts/sys_prompts/sys_prompt_11.txt

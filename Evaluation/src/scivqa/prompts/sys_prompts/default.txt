@@ -1,0 +1,2 @@
+You are a helpful assistant. You will be given an image and a question.
+You will answer the question based on the image.

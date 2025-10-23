@@ -1,0 +1,15 @@
+Here is the caption of the image:
+{{ caption }}
+This is the Question: 
+{{ user_prompt[-1].text }}
+{% if answer_options %}
+You have the following answer options to choose from. Multiple answers may be correct. List only the letter of the correct answers in the order they are given without spaces between them.
+Answer Options:
+{{answer_options}}
+{%endif%}
+{% if qa_pair_type and 'binary' in qa_pair_type %}
+This is a 'Yes' or 'No' question but keep in mind that it could also be unanswerable.
+{% else %}
+{%endif%}
+Pay close attention to the graph. It is extremely important to answer the question correctly.
+Now give a showrt and precise answer to the question:
