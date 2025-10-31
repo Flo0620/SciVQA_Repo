@@ -13,8 +13,14 @@ faulthandler.enable()
 app = Flask(__name__)
 load_dotenv()
 
-images_path = "./shared_task/validation_images"
-batch_dir = "batches_zero_shot_baseline"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--images_path", type=str, default=None)
+parser.add_argument("--batch_dir", type=str, default=None)
+args = parser.parse_args()
+images_path = args.images_path
+batch_dir = args.batch_dir
+
 max_batch_size_bytes = 190 * 1024 * 1024  # 90 MB safety limit
 port = int(os.getenv("PORT", 5000))
 

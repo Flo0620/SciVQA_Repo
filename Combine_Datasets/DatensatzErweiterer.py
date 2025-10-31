@@ -48,29 +48,35 @@ def find_matching_instances(first_dataset, second_dataset):
 
     return matching_instances
 
-def remove_and_save_duplicates(first_dataset, matches, output_file):
+def remove_and_save_duplicates(first_dataset, matches, duplicates_file):
     duplicates = [entry for entry in first_dataset if extract_id_from_image(entry['image']) in matches]
     remaining_entries = [entry for entry in first_dataset if extract_id_from_image(entry['image']) not in matches]
 
     # Save duplicates to a new JSON file
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(duplicates_file, 'w', encoding='utf-8') as f:
         json.dump(duplicates, f, ensure_ascii=False, indent=2)
 
     return remaining_entries
 
+import argparse
 
-# Replace with actual file paths
-first_dataset_path = '/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/arxivqa.jsonl'
-second_dataset_path = '/ltstorage/home/9schleid/SciVQA/unsloth/SpiqaAndSciVqa/completeSciVQAAndSpiQACombined.json'
+parser = argparse.ArgumentParser()
+parser.add_argument("--first_dataset_path", type=str, default=None)
+parser.add_argument("--second_dataset_path", type=str, default=None)
+parser.add_argument("--duplicates_file_path", type=str, default=None)
+parser.add_argument("--filtered_dataset_path", type=str, default=None)
+args = parser.parse_args()
+first_dataset_path = args.first_dataset_path
+second_dataset_path = args.second_dataset_path
+duplicates_file_path = args.duplicates_file_path
+filtered_dataset_path = args.filtered_dataset_path
 
 first_dataset = load_jsonl(first_dataset_path)
 second_dataset = load_json(second_dataset_path)
 
 matches = find_matching_instances(first_dataset, second_dataset)
 
-output_file_path = '/ltstorage/home/9schleid/duplicate_entriesArXivMitSpiUndSciBeiLCSS7.json'
-remaining_entries = remove_and_save_duplicates(first_dataset, matches, output_file_path)
-filtered_dataset_path = '/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/filteredDatasetLCSS7.json'
+remaining_entries = remove_and_save_duplicates(first_dataset, matches, duplicates_file_path)
 with open(filtered_dataset_path, 'w', encoding='utf-8') as f:
     json.dump(remaining_entries, f, ensure_ascii=False, indent=2)
 

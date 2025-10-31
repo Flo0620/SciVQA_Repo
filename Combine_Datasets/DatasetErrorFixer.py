@@ -1,8 +1,12 @@
 import json
+import argparse
 
-# Input and output file paths
-input_file = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/filteredDatasetLCSS6ProcessedForHyperparametertuning_train_split.json"
-output_file = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/filteredDatasetLCSS6ProcessedForHyperparametertuning_train_split_filtered.json"
+parser = argparse.ArgumentParser()
+parser.add_argument("--input_file", type=str, default=None)
+parser.add_argument("--output_file", type=str, default=None)
+args = parser.parse_args()
+input_file = args.input_file
+output_file = args.output_file
 
 # Load the JSON data
 with open(input_file, 'r') as f:

@@ -1,9 +1,14 @@
 import json
+import argparse
 
-# Paths to input and output files
-json1_path = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/filteredDatasetLCSS7.json"
-json2_path = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/filteredDatasetLCSS6.json"
-output_path = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/filteredDatasetLCSS7_minus_6.json"
+parser = argparse.ArgumentParser()
+parser.add_argument("--json1_path", type=str, default=None)
+parser.add_argument("--json2_path", type=str, default=None)
+parser.add_argument("--output_path", type=str, default=None)
+args = parser.parse_args()
+json1_path = args.json1_path
+json2_path = args.json2_path
+output_path = args.output_path
 
 # Load both JSON files
 with open(json1_path, "r") as f1:

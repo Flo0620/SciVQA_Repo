@@ -20,21 +20,7 @@ class DatasetLoader:
                 self.few_shot_dict = json.load(file)
         self.index = 0
         self.image_dir = image_dir
-        #self.system_prompt = "You are an expert data analyst. You will be given an image of a chart and a question.\nYou will answer the question based on the image of the chart.\nIf you are sure that you do not have enough information to answer the question answer with: 'It is not possible to answer this question based only on the provided data.'"
-        #self.user_prompt = """
-        #    Here is the caption of the image:
-        #    {{ sample.caption }}
-#
-        #    Question:
-        #    {{ sample.question }}
-#
-        #    {% if answer_options %}
-        #    You have the following answer options to choose from. Multiple answers may be correct. List only the letter of the correct answers in the order they are given without spaces between them.
-        #    Answer Options:
-        #    {{ answer_options }}
-        #    {% endif %}
-        #    Give a short and precise answer:
-        #    """
+
         dataset_name = next(item['dataset'] for item in self.cfg['defaults'] if 'dataset' in item)
         dataset_config_path = f"/ltstorage/home/9schleid/scivqa/conf/dataset/{dataset_name}.yaml"
         with open(dataset_config_path, 'r') as dataset_cfg_file:
@@ -50,7 +36,6 @@ class DatasetLoader:
             if (i+1) % 5000 == 0:
                 print(f"Processing sample {i+1}/{len(self.data)}")
             conversation = self.convertToConversation(sample, addAnswerPrefix)
-            #converted_dataset.append({"messages": conversation})
             converted_dataset.append(conversation)
         random.seed(42)
         random.shuffle(converted_dataset)
@@ -82,30 +67,19 @@ class DatasetLoader:
         try:
             image_path = f"{self.image_dir}/{sample['image_file']}" if self.image_dir else sample['image_file']
             image_data = Image.open(image_path)
-            
-            #question_content = sample['question']
-            #if "finite answer set non-binary" in sample.get('qa_pair_type'):
-            #    answer_options = [f"{key}: {value}" for d in sample['answer_options'] for key, value in d.items()]
-            #    answer_options = '\n'.join(answer_options)
-            #    question_content += f" Choose from the following answer options:\n{answer_options}"
-            #    question_content += f"\n Only answer the question with the letter of the answer option. Do not include any other text."
-            #elif "finite answer set binary" in sample.get('qa_pair_type'):
-            #    question_content += f" Answer with 'Yes' or 'No'."
 
             if self.cfg['apply_few_shot']:
                 # Determine whether to find a matching row with or without answer options
                 if len(sample["answer_options"]) > 0:
-                    # Find the first entry in few_shot_dict with answer options and matching figure_type
+                    # Find the first entry in few_shot_dict with answer options 
                     matching_row = next(
                     item for item in self.few_shot_dict
-                    if len(item["answer_options"]) > 0 and item["figure_type"] == sample.get("figure_type",'')
-                    )
+                    if len(item["answer_options"]) > 0)
                 else:
-                    # Find the first entry in few_shot_dict without answer options and matching figure_type
+                    # Find the first entry in few_shot_dict without answer options
                     matching_row = next(
                     item for item in self.few_shot_dict
-                    if len(item["answer_options"]) == 0 and item["figure_type"] == sample.get("figure_type",'')
-                    )
+                    if len(item["answer_options"]) == 0)
 
                 # Prepare the values for rendering the j2 template
                 few_shot_image_file_name = matching_row["image_file"]
@@ -161,17 +135,3 @@ class DatasetLoader:
             return conversation
         except FileNotFoundError:
             raise FileNotFoundError(f"Image file {sample['image_file']} not found.")
-
-# Example usage
-#file_path = "shared_task/train_2025-03-27_18-34-44.json"
-#img_dir = "shared_task/images_train/images_train"
-#loader = DatasetLoader(file_path, image_dir=img_dir)
-#try:
-#    index = 0
-#    while index <5:
-#        sample = loader.getNextSample()
-#        print(loader.convertToConversation(sample))  # Process the sample
-#        index += 1
-#except StopIteration as e:
-#    print(e)
-#print(len(loader.getConvertedDataset()))

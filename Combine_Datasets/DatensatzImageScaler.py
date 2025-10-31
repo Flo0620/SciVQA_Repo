@@ -1,9 +1,14 @@
 import os
 from PIL import Image
 
-# Input and output directories
-input_dir = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/LCSS7_minus_6_Testset_images"
-output_dir = "/ltstorage/home/9schleid/SciVQA/unsloth/arxivqa/LCSS7_minus_6_Testset_images_resized"
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--input_dir", type=str, default=None)
+parser.add_argument("--output_dir", type=str, default=None)
+args = parser.parse_args()
+input_dir = args.input_dir
+output_dir = args.output_dir
 
 # Maximum number of pixels
 max_pixels = 500000

@@ -14,12 +14,9 @@ import yaml
 from dotenv import load_dotenv
 import os
 
-# Load the .env file
 load_dotenv()
 
-# Access the variable
 hf_token = os.getenv("HF_Token")
-#from mlflow.models import infer_signature
 
 import argparse
 
@@ -44,13 +41,12 @@ print(args.learning_rate)
 print(args.model_id)
 print(args.lr_scheduler_type)
 print(args.output_dir)
-print(args.resume_training)  # Will be True if --resume_training is passed, otherwise False
+print(args.resume_training)
 print(args.num_epochs)
 print(args.dataset_path)
 
 dataset = DatasetLoader(
     dataset_json_file_path = args.dataset_path,
-    #filter_for_dataset = "arxivqa",
     image_dir = "/ltstorage/home/9schleid/SciVQA/unsloth/SciVQAAndSpiQAAndArXivQA/SPIQA_And_SciVQA_And_ArXivQA_train_images"
 )
 
@@ -60,14 +56,6 @@ validation_dataset = DatasetLoader(
 )
 
 from transformers import BitsAndBytesConfig
-
-# BitsAndBytesConfig int-4 config
-#bnb_config_args = {
-#    "load_in_4bit": True,
-#    "bnb_4bit_use_double_quant": True,
-#    "bnb_4bit_quant_type": "nf4",
-#    "bnb_4bit_compute_dtype": torch.bfloat16
-#}
 
 # BitsAndBytesConfig int-8 config
 bnb_config_args = {
@@ -223,11 +211,4 @@ if args.resume_training:
 else:
     trainer.train()
 trainer.save_model(training_args.output_dir)
-
-#model = model.merge_and_unload()  # <- This merges LoRA into the base model
-#model.save_pretrained("Qwen2_5_32GB_Debugging")
-#processor.tokenizer.save_pretrained("Qwen2_5_32GB_Debugging")
-
-#processor.tokenizer.push_to_hub("Flo0620/Qwen2.5-VL-32B-instruct-4bit", token = {hf_token})
-#model.push_to_hub("Flo0620/Qwen2.5-VL-32B-instruct-4bit", save_method = "merged_16bit", token = {hf_token})
 

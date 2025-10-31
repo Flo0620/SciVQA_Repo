@@ -106,9 +106,7 @@ def flatten_dict(config: dict | Config | Any) -> dict[str, str | int | float]:
 mlflow.set_tracking_uri("https://mlflow-g4k-serving-474827717259.europe-west3.run.app/")
 
 with mlflow.start_run(run_id="86755bf6f4544c1e942522c76fc418aa") as run:
-    #mlflow.log_param("p1","your_corrected_value")
-    #mlflow.log_metric("m1",42.0) # your corrected metrics
-    #mlflow.log_artifact("data_sample.html") # your corrected artifact file
+
     # Read the JSON file
     with open("/ltstorage/home/9schleid/scivqa/outputs/25-04-23_12:43_gpt-4o-mini/inference_log_shortend.json", "r") as file:
         data = json.load(file)

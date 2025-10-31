@@ -2,10 +2,15 @@ import json
 import time
 import uuid
 
-# File paths
-inference_log_path = "/ltstorage/home/9schleid/OpenAIServer/temp/inference_log.json"
-validation_path = "/ltstorage/home/9schleid/OpenAIServer/shared_task/test_2025-07-03_09-01.json"
-output_path = "/ltstorage/home/9schleid/OpenAIServer/temp/inference_log_32B_one_shot_auf_test.json"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--inference_log_path", type=str, default=None)
+parser.add_argument("--validation_path", type=str, default=None)
+parser.add_argument("--output_path", type=str, default=None)
+args = parser.parse_args()
+inference_log_path = args.inference_log_path
+validation_path = args.validation_path
+output_path = args.output_path
 
 # Load inference log (instance_id -> response)
 with open(inference_log_path, "r") as f:

@@ -41,7 +41,7 @@ try:
             print("Starting server...")
             server_proc = subprocess.Popen(["python", "/ltstorage/home/9schleid/SciVQA/unsloth/finetunedModelInferenceWithoutUnslothServer.py",
                                             "--model_id", model_id,
-                                            "--adapter_path", f"{output_dir}/checkpoint-{run_checkpoint_number}",#vorher bei ersten ArXivQA Runs: 15385 unklar warum
+                                            "--adapter_path", f"{output_dir}/checkpoint-{run_checkpoint_number}",
                                             "--port", port])
 
             # Step 3: Wait for server to be ready
@@ -64,7 +64,7 @@ try:
             print("Running evaluation...")
             evaluate = subprocess.run(["uv", "run", "-m", "scivqa.evaluation.execution",
                                     f"model_id={model_id}",
-                                    f"adapter_path={output_dir}/checkpoint-{run_checkpoint_number}",#vorher bei ersten ArXivQA Runs: 15385 unklar warum
+                                    f"adapter_path={output_dir}/checkpoint-{run_checkpoint_number}",
                                     f"+num_epochs={num_epochs}",
                                     f"++base_url=http://localhost:{port}/v1/",
                                     f"+hyperparameterTuning=True"]

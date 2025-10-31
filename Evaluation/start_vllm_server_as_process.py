@@ -44,9 +44,9 @@ def main(cfg: Config) -> None:
         API_KEY,
         "--enable-auto-tool-choice",
         "--allowed-local-media-path",
-        #f"{cfg.dataset.input_dir}/{cfg.dataset.split}/",
+        f"{cfg.dataset.input_dir}/{cfg.dataset.split}/",
         #f"/ltstorage/home/9schleid/scivqa/data/arxiv_qa/LCSS7_minus_6_Testset_images_resized/arxivqa_images/",
-        f"/ltstorage/home/9schleid/scivqa/data/test/",
+        #f"/ltstorage/home/9schleid/scivqa/data/test/",
         "--tool-call-parser",
         cfg.model.tool_call_parser,
         "--gpu-memory-utilization",
@@ -59,12 +59,6 @@ def main(cfg: Config) -> None:
         str(cfg.model.tensor_parallel_size),
         "--quantization",
         str(cfg.model.quantization),
-        #"--load_format",
-        #str("bitsandbytes"),
-        #"--dtype",
-        #str("bfloat16"),
-        #"--max_num_batched_tokens",
-        #str(1024),
     ]
 
     # Execute the serve command
