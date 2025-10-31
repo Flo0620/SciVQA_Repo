@@ -4,8 +4,7 @@ hydra:
     dir: outputs/${now:%y-%m-%d_%H:%M}_${model.model_name_short}
 
 defaults:
-  #- model: qwen2_5-VL-7B-Instruct
-  - model: gpt-4o-mini
+  - model: qwen2_5-VL-7B-Instruct.yaml
   - dataset: scivqaOutputFormat
   - mlflow: scivqa
   - _self_
@@ -23,22 +22,16 @@ metrics:
   - GeneratedAnswerLength
   - ExactMatch
 
-#output_folder: outputs/${now:%y-%m-%d_%H:%M}_${model.model_name_short}
-output_folder: src/scivqa/evaluation/temp
+output_folder: outputs/${now:%y-%m-%d_%H:%M}_${model.model_name_short}
 template_folder: /ltstorage/home/9schleid/scivqa
 template_name: /src/scivqa/prompts/templates/version_v7.j2
 use_vllm: false
 base_url: http://localhost:${vllm_port}/v1/
-vllm_port: 15866
+vllm_port: 15833
 apply_few_shot: false
 few_shot_template: /ltstorage/home/9schleid/scivqa/src/scivqa/prompts/templates/few_shot_v1.j2
-few_shot_dataset_path: /ltstorage/home/9schleid/scivqa/data/train_2025-03-27_18-34-44.json
-few_shot_images_path: /ltstorage/home/9schleid/scivqa/data/train
+few_shot_dataset_path: /ltstorage/home/9schleid/SciVQA/unsloth/few_shot_example.json
+few_shot_images_path: /ltstorage/home/9schleid/SciVQA/unsloth/few_shot_image
 
 # config für finetunedOhneUnsloth Inference Server
-adapter_path: "/ltstorage/home/9schleid/SciVQA/unsloth/Qwen2_5_7B_r64_a128_d0_2Final"
-#adapter_path : "/ltstorage/home/9schleid/SciVQA/unsloth/Qwen2_5_32B-8bitChangedR"
-#adapter_path : "/ltstorage/home/9schleid/SciVQA/unsloth/Qwen2_5_32B-8bit_sysPrompt11"
-#adapter_path : "/ltstorage/home/9schleid/SciVQA/unsloth/Qwen2_5_32B-8bit_2Epochs"
-#model_id : "Qwen/Qwen2.5-VL-32B-Instruct"
-model_id : "Qwen/Qwen2.5-VL-7B-Instruct"
+model_id : "Qwen/Qwen2.5-VL-32B-Instruct"
