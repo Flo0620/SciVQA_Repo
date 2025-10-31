@@ -1,4 +1,5 @@
 This repository contains the code for the master thesis "Visual Question Answering on Scientific Charts Using Fine-Tuned Vision-Language Models".
+The thesis explored the effects of prompt engineering and fine-tuning of Vision-Language Models for question answering on scientific charts in the context of the [shared taks SciVQA](https://aclanthology.org/2025.sdp-1.18/).
 
 The repository contains multiple subfolders whose contents are explained in the following, mentioning the most important scripts in each subfolder.
 It also contains [encourage](https://github.com/uhh-hcds/encourage) as a sub-repository, which was used as a base in this thesis.
