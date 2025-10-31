@@ -24,14 +24,6 @@ import json
 from tqdm import tqdm
 from jinja2 import Template
 
-#import argparse
-#
-#parser = argparse.ArgumentParser()
-#parser.add_argument("--adapter_path", type=str, default=None)
-#parser.add_argument("--model_id", type=str, default=None)
-#
-#args = parser.parse_args()
-
 
 config_path = str((Path(__file__).parents[3] / "conf").resolve())
 
@@ -65,13 +57,13 @@ def prepare_data(cfg, df: pd.DataFrame) -> tuple[list, list]:
                 # Find the first entry in few_shot_dict with answer options and matching figure_type
                 matching_row = next(
                 item for item in few_shot_dict
-                if len(item["answer_options"]) > 0 and item["figure_type"] == row["figure_type"]
+                if len(item["answer_options"]) > 0
                 )
             else:
                 # Find the first entry in few_shot_dict without answer options and matching figure_type
                 matching_row = next(
                 item for item in few_shot_dict
-                if len(item["answer_options"]) == 0 and item["figure_type"] == row["figure_type"]
+                if len(item["answer_options"]) == 0
                 )
 
             # Prepare the values for rendering the j2 template
@@ -120,10 +112,8 @@ def main(cfg: Config) -> None:
     qa_dataset = (
         load_dataset(cfg.dataset.name, split=cfg.dataset.split)
         .to_pandas()
-        #pd.read_json("/ltstorage/home/9schleid/scivqa/data/spiqa/SPIQA_test_split.json")
         .reset_index(drop=True)
     )
-    print(f"Loaded dataset {cfg.dataset.name} with {len(qa_dataset)} entries.")
 
     split_by_figure_type = getattr(cfg.dataset, "split_by_figure_type", False)
     if split_by_figure_type:
@@ -134,21 +124,7 @@ def main(cfg: Config) -> None:
 
     for figure_type, sub_df in grouped:
         sub_df = sub_df.reset_index(drop=True)
-        #if figure_type < "pie chart":
-        #    continue  # Skip until pie chart for quicker testing
-        print(f"Processing figure_type: {figure_type} with {len(sub_df)} entries.")
-        # You can run your evaluation logic for each sub_df here
-        # Example: meta_datas, contexts, few_shot_image_files = prepare_data(cfg, sub_df)
-        # Continue with your workflow for each sub_df
-
-        #qa_dataset = qa_dataset[qa_dataset['answer_options'].apply(lambda x: len(x) > 0)].reset_index(drop=True)
-        #qa_dataset = qa_dataset[qa_dataset['qa_pair_type'].apply(lambda x: "infinite" in x)].reset_index(drop=True)
-        #qa_dataset = qa_dataset[qa_dataset['qa_pair_type'].apply(lambda x: "infinite answer set non-visual" in x)].reset_index(drop=True)
-        #qa_dataset = qa_dataset[qa_dataset['qa_pair_type'].apply(lambda x: "non-binary non-visual" in x)].reset_index(drop=True)
-        #qa_dataset = qa_dataset[qa_dataset['qa_pair_type'].apply(lambda x: " binary non-visual" in x)].reset_index(drop=True)
-        #qa_dataset = qa_dataset[qa_dataset['qa_pair_type'].apply(lambda x: "unanswerable" in x)].reset_index(drop=True)
-        #qa_dataset = qa_dataset[qa_dataset['qa_pair_type'].apply(lambda x: " visual" in x)].reset_index(drop=True)
-
+       
         litellm._logging._disable_debugging()
         mlflow.openai.autolog()
 
@@ -203,7 +179,9 @@ def main(cfg: Config) -> None:
                 if cfg.use_vllm:
                     responses = runner.run(prompt_collection)
                     json_dump = [response.to_dict() for response in responses.response_data]
-
+                    for response in json_dump:
+                        response["response"] = response["response"].removeprefix("Answer: ")
+    
                 else:
                     responses = []
                     for i, prompt in enumerate(tqdm(prompt_collection, desc="Processing Prompts")):
@@ -232,6 +210,8 @@ def main(cfg: Config) -> None:
             )
             if cfg.use_vllm:
                 json_dump = [flatten_dict(response.to_dict()) for response in responses.response_data]
+                for response in json_dump:
+                    response["response"] = response["response"].removeprefix("Answer: ")
             else:
                 json_dump = [flatten_dict(response) for response in responses]
 

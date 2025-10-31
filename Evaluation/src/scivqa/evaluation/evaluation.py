@@ -40,7 +40,6 @@ def evaluation(cfg: Config) -> None:
     mlflow.log_params(flat_config)
 
     with mlflow.start_span(name="loading_results"):
-        print("OUtput folder", cfg.output_folder)
         results_path = Path(cfg.output_folder)
         if not results_path.exists() or not results_path.is_dir():
             raise ValueError(f"Results folder not found: {results_path}")
